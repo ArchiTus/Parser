@@ -26,8 +26,7 @@ namespace Parser
             string[] Day = new string[8];
             string[] DayD = new string[8];
             string ret = "";
-            int i = 0;
-            // <em class="(date_of_week\s+[A-Za-z]+)">([0-9]+)</em>
+            int i = 0;            
             foreach (Match match in Regex.Matches(Response, @"<em class=""(date_of_week\s+[A-Za-z]+)"">([0-9]+)</em>"))
             {
                 DayD[i] = match.Groups[2].Value;
@@ -63,8 +62,7 @@ namespace Parser
             string[] Day = new string[10];
             string[] DayD = new string[10];
             string ret = "";
-            int i = 0;
-            // <div class="forecast-brief__item-temp-day" title="Максимальная температура днём">+2 днём</div>
+            int i = 0;            
             foreach (Match match in Regex.Matches(Response, @"<div class=""forecast-brief__item-temp-day"" title=""Максимальная температура днём"">([−+]?[0-9]+) днём</div>"))
             {
                 MaxT[i] = match.Groups[1].Value;
@@ -77,10 +75,7 @@ namespace Parser
                 Mass[i] = MaxT[i];
                 i++;
             }
-            i = 0;
-            //<span class="forecast-brief__item-day-name">сегодня</span>
-            //<span class="forecast-brief__item-day">([0-9]+)</span>
-            //<strong class="forecast-detailed__day-number">([0-9]+)
+            i = 0;            
             foreach (Match match in Regex.Matches(Response1, @"<strong class=""forecast-detailed__day-number"">([0-9]+)"))
             {
                 DayD[i] = match.Groups[1].Value;
@@ -108,8 +103,7 @@ namespace Parser
             string[] Day = new string[7];
             string[] DayD = new string[7];
             string ret = "";
-            int i = 0;
-            // <div class="forecast-brief__item-temp-day" title="Максимальная температура днём">+2 днём</div>
+            int i = 0;            
             foreach (Match match in Regex.Matches(Response, @"<td align=center>([А-Яа-я]+)<BR><nobr>([0-9]+)\s([А-Яа-я]+)</nobr></td>"))
             {
                 Day[i] = match.Groups[1].Value;
@@ -124,8 +118,7 @@ namespace Parser
                 _Day[i] = DayD[i];
                 i++;
             }
-            i = 0;
-            //<td class=pogodacell>([-+]?[0-9]) &nbsp;&frasl;&nbsp; ([-+]?[0-9])</td>
+            i = 0;            
             foreach (Match match in Regex.Matches(Response, @"<td class=pogodacell>([-+]?[0-9]{1,2}) &nbsp;&frasl;&nbsp; ([-+]?[0-9]{1,2})</td>"))
             {
                 MinT[i] = match.Groups[1].Value;
@@ -141,8 +134,7 @@ namespace Parser
         }
 
         private void Draw()
-        {
-            //340 300
+        {            
             Bitmap bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             Graphics graph = Graphics.FromImage(bmp);
             Pen pen = new Pen(Color.Black);
@@ -151,13 +143,10 @@ namespace Parser
             Pen os = new Pen(Color.Black);
             int[] pointsX = new int[7];
             int[] pointsY = new int[7];
-            Font drawFont = new Font("Calibri", 10);
-            
+            Font drawFont = new Font("Calibri", 10);            
             SolidBrush drawBrush = new SolidBrush(Color.Black);
-
             int x = 5, p = 32;
-            os.Width = 2;
-            //graph.DrawLine(pen, 15, 20, 375, 20);
+            os.Width = 2;            
             graph.DrawLine(os, 30, 145, 325, 145);
             graph.DrawLine(os, 30, 15, 30, 295);
             for (int i = 0; i < 17; i++)
